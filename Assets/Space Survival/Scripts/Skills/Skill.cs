@@ -34,6 +34,7 @@ public class Skill : MonoBehaviour
 
 		if (GameManager.Instance.enemies.Count == 0)
 		{
+			//print("에너미즈가 비어있음");
 			// 발사 절차를 생략
 			isFiring = false;
 		}

@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
 				if (false == contactedColls.Contains(contactedColl))
 				{
 					// 유효한 타격이 발생
-					print($"Contacted Collider : {contactedColl.name}");
+					//print($"Contacted Collider : {contactedColl.name}");
 					contactedColls.Add(contactedColl);
 
 					pierceCount--;
