@@ -70,6 +70,9 @@ public class EnemySpawner : MonoBehaviour
 
 			//Instantiate(enemyPrefab, playerPos + spawnPos, Quaternion.identity);
 			enemy.transform.position = playerPos + spawnPos;
+
+			// 이 에너미를 리스트에 팝으로 추가
+			GameManager.Instance.enemies.Add(enemy);
 		}
 	}
 }

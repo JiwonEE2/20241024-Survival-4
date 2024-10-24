@@ -87,6 +87,7 @@ public class Enemy : MonoBehaviour
 		GameManager.Instance.player.killCount++;
 		GameManager.Instance.player.GainExp(exp);
 		//Destroy(gameObject);
+		hp = maxHp;
 		EnemyPool.pool.Push(this);
 	}
 
