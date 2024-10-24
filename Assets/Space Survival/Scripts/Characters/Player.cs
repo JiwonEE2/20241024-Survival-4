@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 	public Text expText;
 
 	private Transform moveDir;
-	private Transform fireDir;
+	//private Transform fireDir;
 
 	private Rigidbody2D rb;
 	public Animator tailfireAnimCtrl;
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 	private void Awake()
 	{
 		moveDir = transform.Find("MoveDir");
-		fireDir = transform.Find("FireDir");
+		//fireDir = transform.Find("FireDir");
 		rb = GetComponent<Rigidbody2D>();
 	}
 

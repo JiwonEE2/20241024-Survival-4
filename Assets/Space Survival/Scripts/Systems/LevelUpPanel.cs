@@ -7,6 +7,6 @@ public class LevelUpPanel : MonoBehaviour
 	public void ResumeButtonClick()
 	{
 		Time.timeScale = 1;
-		gameObject.GetComponentInParent<Transform>().gameObject.SetActive(false);
+		gameObject.SetActive(false);
 	}
 }
