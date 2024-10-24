@@ -5,9 +5,12 @@ using UnityEngine;
 // 기본 공격. 투사체를 발사하는 스킬
 public class LaserGun : MonoBehaviour
 {
-	public Transform target;            // 투사체가 향해야 할 방향에 있는 대상
+	// target을 지정해주는 함수가 필요하겠다.
+	public Enemy targetEnemy;            // 투사체가 향해야 할 방향에 있는 대상
+	public bool isFiring;
+
 	public Projectile projectilePrefab; // 투사체 프리팹
-	public ProjectilePool projPool; // Projectile Prefab으로 만들어진 게임 오브젝트를 관리하는 오브젝트풀
+	public ProjectilePool projPool;     // Projectile Prefab으로 만들어진 게임 오브젝트를 관리하는 오브젝트풀
 
 	public float damage;                // 데미지
 	public float projectileSpeed;       // 투사체 속도
@@ -26,11 +29,38 @@ public class LaserGun : MonoBehaviour
 
 	protected virtual void Update()
 	{
-		if (target == null)
+		// 가장 가까운 적을 탐색하여 사격 방향을 정할 때
+		targetEnemy = null;   // 대상으로 지정된 적
+		float targetDistance = float.MaxValue;    // 대상과의 거리
+
+		if (GameManager.Instance.enemies.Count == 0)
+		{
+			// 발사 절차를 생략
+			isFiring = false;
+		}
+		else
+		{
+			isFiring = true;
+		}
+
+		foreach (Enemy enemy in GameManager.Instance.enemies)
+		{
+			float distance = Vector3.Distance(enemy.transform.position, transform.position);
+			if (distance < targetDistance)    // 이전에 비교한 적보다 가까우면
+			{
+				targetDistance = distance;
+				targetEnemy = enemy;
+			}
+		}
+
+		if (targetEnemy == null)
 		{
 			return;
 		}
-		transform.up = target.position - transform.position;
+		else
+		{
+			transform.up = targetEnemy.transform.position - transform.position;
+		}
 	}
 
 	// 공격 코루틴
@@ -40,10 +70,13 @@ public class LaserGun : MonoBehaviour
 		{
 			yield return new WaitForSeconds(shotInterval);
 			// 1. 투사체 개수가 올라가면 0.05초 간격으로 투사체 개수만큼 발사 반복
-			for (int i = 0; i < projectileCount; i++)
+			if (isFiring)
 			{
-				Fire();
-				yield return new WaitForSeconds(innerInterval);
+				for (int i = 0; i < projectileCount; i++)
+				{
+					Fire();
+					yield return new WaitForSeconds(innerInterval);
+				}
 			}
 		}
 	}

@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
 
 		// 리턴이 있는 함수를 호출할 때, 리턴을 사용하지 않는다면
 		// 아예 반환을 위한 메모리를 점유하지 않고 함수만 호출
-		_ = StartCoroutine(FireCoroutine());
+		//_ = StartCoroutine(FireCoroutine());
 	}
 
 	void Update()
@@ -74,35 +74,34 @@ public class Player : MonoBehaviour
 		//Vector3 -> Vector2로 캐스팅 할 때 : z값이 생략
 
 		// 가장 가까운 적을 탐색하여 사격 방향을 정할 때
-		Enemy targetEnemy = null;   // 대상으로 지정된 적
-		float targetDistance = float.MaxValue;    // 대상과의 거리
+		//Enemy targetEnemy = null;   // 대상으로 지정된 적
+		//float targetDistance = float.MaxValue;    // 대상과의 거리
 
-		if (GameManager.Instance.enemies.Count == 0)
-		{
-			// 발사 절차를 생략
-			isFiring = false;
-		}
-		else
-		{
-			isFiring = true;
-		}
+		//if (GameManager.Instance.enemies.Count == 0)
+		//{
+		//	// 발사 절차를 생략
+		//	isFiring = false;
+		//}
+		//else
+		//{
+		//	isFiring = true;
+		//}
 
-		foreach (Enemy enemy in GameManager.Instance.enemies)
-		{
-			float distance = Vector3.Distance(enemy.transform.position, transform.position);
-			if (distance < targetDistance)    // 이전에 비교한 적보다 가까우면
-			{
-				targetDistance = distance;
-				targetEnemy = enemy;
-			}
+		//foreach (Enemy enemy in GameManager.Instance.enemies)
+		//{
+		//	float distance = Vector3.Distance(enemy.transform.position, transform.position);
+		//	if (distance < targetDistance)    // 이전에 비교한 적보다 가까우면
+		//	{
+		//		targetDistance = distance;
+		//		targetEnemy = enemy;
+		//	}
+		//}
 
-		}
-
-		Vector2 fireDir = Vector2.zero;
-		if (targetEnemy != null)
-		{
-			fireDir = targetEnemy.transform.position - transform.position;
-		}
+		//Vector2 fireDir = Vector2.zero;
+		//if (targetEnemy != null)
+		//{
+		//	fireDir = targetEnemy.transform.position - transform.position;
+		//}
 
 		Move(moveDir);
 
@@ -121,7 +120,7 @@ public class Player : MonoBehaviour
 			// transform.up/right/forward에 방향 벡터를 대입할 때는 방향 벡터의 magnitude를 굳이 1로 제한하지 않아도 된다
 			this.moveDir.up = moveDir;
 		}
-		this.fireDir.up = fireDir;
+		//this.fireDir.up = fireDir;
 
 		//print(this.moveDir.up);		// normalized되어 magnitude가 1로 고정된 방향 벡터가 반환됨
 	}
@@ -140,29 +139,29 @@ public class Player : MonoBehaviour
 	/// <summary>
 	/// 투사체를 발사.
 	/// </summary>
-	public void Fire()
-	{
-		Projectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+	//public void Fire()
+	//{
+	//	Projectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
-		projectile.transform.up = fireDir.up;
-		projectile.damage = damage;
-	}
+	//	projectile.transform.up = fireDir.up;
+	//	projectile.damage = damage;
+	//}
 
-	public float fireInterval;
-	public bool isFiring;
+	//public float fireInterval;
+	//public bool isFiring;
 
-	// 자동으로 투사체 발사 코루틴
-	private IEnumerator FireCoroutine()
-	{
-		while (true)
-		{
-			yield return new WaitForSeconds(fireInterval);
-			if (isFiring)
-			{
-				Fire();
-			}
-		}
-	}
+	//// 자동으로 투사체 발사 코루틴
+	//private IEnumerator FireCoroutine()
+	//{
+	//	while (true)
+	//	{
+	//		yield return new WaitForSeconds(fireInterval);
+	//		if (isFiring)
+	//		{
+	//			Fire();
+	//		}
+	//	}
+	//}
 
 	public void TakeHeal(float heal)
 	{

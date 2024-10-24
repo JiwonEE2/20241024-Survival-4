@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
 	private void Awake()
 	{
 		coll = GetComponent<CircleCollider2D>();
-		coll.enabled = false;
+		//coll.enabled = false;
 	}
 
 	private void OnEnable()
@@ -52,11 +52,11 @@ public class Projectile : MonoBehaviour
 		}
 	}
 
-	private void OnDrawGizmos()
-	{
-		Gizmos.color = Color.green;
-		Gizmos.DrawWireSphere(transform.position, coll.radius);
-	}
+	//private void OnDrawGizmos()
+	//{
+	//	Gizmos.color = Color.green;
+	//	Gizmos.DrawWireSphere(transform.position, coll.radius);
+	//}
 
 	public void Move(Vector2 dir)
 	{
@@ -65,8 +65,10 @@ public class Projectile : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
+		//print("(Æ®¸®°Å)ÃÑ¾ËÀÌ ¹«¾ð°¡¿¡ ºÎµúÈû");
 		if (other.TryGetComponent<Enemy>(out Enemy enemy))
 		{
+			//print("(Æ®¸®°Å)ÃÑ¾ËÀÌ ¿¡³Ê¹Ì¿¡ ºÎµúÈû");
 			enemy.TakeDamage(damage);
 			//Destroy(gameObject);
 			ProjectilePool.pool.Push(this);

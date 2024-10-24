@@ -84,6 +84,7 @@ MonoBehaviour:
   damage: 10
   moveSpeed: 5
   duration: 3
+  pierceCount: 0
 --- !u!1 &2128003209349395700
 GameObject:
   m_ObjectHideFlags: 0
