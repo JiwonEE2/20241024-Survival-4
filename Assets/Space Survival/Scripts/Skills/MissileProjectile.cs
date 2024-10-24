@@ -16,7 +16,7 @@ public class MissileProjectile : MonoBehaviour
 	private void Awake()
 	{
 		coll = GetComponent<CircleCollider2D>();
-		coll.enabled = false;
+		//coll.enabled = false;
 		rendererTransform = transform.Find("Renderer");
 	}
 
@@ -32,7 +32,7 @@ public class MissileProjectile : MonoBehaviour
 		float endTime = startTime + duration;
 		rendererTransform.localPosition = rendererStartPos;
 
-		// while문 전체가 WaitnewSecond역할을 한다
+		// while문 전체가 WaitnewSeconds역할을 한다
 		while (Time.time < endTime)
 		{
 			yield return null;  // 프레임마다 1회씩 반복
@@ -50,6 +50,8 @@ public class MissileProjectile : MonoBehaviour
 		{
 			if (contactedColl.CompareTag("Enemy"))
 			{
+				Enemy attackedEnemy = contactedColl.gameObject.GetComponent<Enemy>();
+				attackedEnemy.TakeDamage(damage);
 				print($"Exploded Collider : {contactedColl.name}");
 			}
 		}
