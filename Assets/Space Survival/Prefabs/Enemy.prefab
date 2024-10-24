@@ -377,7 +377,7 @@ MonoBehaviour:
   moveSpeed: 3
   hpBar: {fileID: 8411193559293531160}
   impactParticle: {fileID: 5895541606823289269, guid: 03c31242121e15049b9a02487ee17f94, type: 3}
-  exp: 50
+  exp: 10
   damageInterval: 1
 --- !u!1 &4690664931231109834
 GameObject:
