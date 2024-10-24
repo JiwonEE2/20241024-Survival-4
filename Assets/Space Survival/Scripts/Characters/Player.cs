@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
 	private Rigidbody2D rb;
 	public Animator tailfireAnimCtrl;
 
+	public GameObject levelUpPanel;
+
 	private void Awake()
 	{
 		moveDir = transform.Find("MoveDir");
@@ -198,15 +200,22 @@ public class Player : MonoBehaviour
 			level++;
 			if (level < levelupSteps.Length)
 			{
-				currentMaxExp = levelupSteps[level];
+				// 레벨업하면 레벨업 이펙트, UI, 얻게된 스킬도
+				//DoLevelUp();
+				DoLevelUp();
 			}
-
-			// 레벨업하면 레벨업 이펙트, UI, 얻게된 스킬도
-			//DoLevelUp();
 		}
-
 		levelText.text = (level + 1).ToString();
 		expText.text = this.exp.ToString();
+	}
+
+	private void DoLevelUp()
+	{
+		currentMaxExp = levelupSteps[level];
+		// 레벨업패널 활성화 -> 레벨업 패널 퍼블릭으로 들고오기
+		levelUpPanel.SetActive(true);
+		// 시간 0
+		Time.timeScale = 0;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
