@@ -18,11 +18,8 @@ public class Enemy : MonoBehaviour
 	//Getter/Setter
 
 	private Transform target; //추적할 대상
-
 	public Image hpBar;
-
 	private Rigidbody2D rb;
-
 	public ParticleSystem impactParticle;
 
 	private void Awake()
@@ -35,7 +32,7 @@ public class Enemy : MonoBehaviour
 	// 편법이다.
 	private IEnumerator Start()
 	{
-		GameManager.Instance.enemies.Add(this);   // 적 리스트에 자기 자신을 추가
+		//GameManager.Instance.enemies.Add(this);   // 적 리스트에 자기 자신을 추가
 		maxHp = hp;
 		yield return null;    // 한 프레임 쉬자
 		target = GameManager.Instance.player.transform;
@@ -86,10 +83,11 @@ public class Enemy : MonoBehaviour
 
 	public void Die()
 	{
-		GameManager.Instance.enemies.Remove(this);
+		//GameManager.Instance.enemies.Remove(this);
 		GameManager.Instance.player.killCount++;
 		GameManager.Instance.player.GainExp(exp);
-		Destroy(gameObject);
+		//Destroy(gameObject);
+		EnemyPool.pool.Push(this);
 	}
 
 	public float damageInterval;    // 데미지 간격

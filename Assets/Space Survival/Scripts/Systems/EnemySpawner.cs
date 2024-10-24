@@ -12,7 +12,9 @@ public class EnemySpawner : MonoBehaviour
 	[Tooltip("스폰될 때 플레이어로부터의 최대/최소 거리\nx:최소, y:최대")]
 	public Vector2 minMaxDist;
 
-	public GameObject enemyPrefab;      // 적 프리팹
+	public Enemy enemyPrefab;      // 적 프리팹
+	public EnemyPool enemyPool;
+
 	public float spawnInterval;         // 생성 간격
 
 	private void Start()
@@ -34,6 +36,7 @@ public class EnemySpawner : MonoBehaviour
 	{
 		for (int i = 0; i < count; i++)
 		{
+			Enemy enemy = enemyPool.Pop();
 			Vector2 playerPos = GameManager.Instance.player.transform.position;
 			// Random.insideUnitCircle : 길이가 1인 원 안에서 랜덤 위치의 좌표를 반환
 			Vector2 spawnPos;
@@ -65,7 +68,8 @@ public class EnemySpawner : MonoBehaviour
 			//spawnPos = (ranPos * (minMaxDist.y - minMaxDist.x)) + (ranPos.normalized * minMaxDist.x);
 			//print($"spawnPos : {spawnPos}");
 
-			Instantiate(enemyPrefab, playerPos + spawnPos, Quaternion.identity);
+			//Instantiate(enemyPrefab, playerPos + spawnPos, Quaternion.identity);
+			enemy.transform.position = playerPos + spawnPos;
 		}
 	}
 }
